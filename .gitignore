@@ -6,3 +6,5 @@
 /.psa*
 /.psc*
 /output/
+*.swp
+*.swo
