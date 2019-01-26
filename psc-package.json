@@ -1,0 +1,17 @@
+{
+  "name": "purescript-validation-exercises",
+  "set": "psc-0.12.1",
+  "source": "https://github.com/purescript/package-sets.git",
+  "depends": [
+    "prelude",
+    "console",
+    "effect",
+    "email-validate",
+    "generics-rep",
+    "lists",
+    "psci-support",
+    "read",
+    "strings",
+    "validation"
+  ]
+}
