@@ -2,12 +2,13 @@ module Main where
 
 import Prelude
 
+import Data.Array (fromFoldable)
 import Data.Bifunctor (bimap)
 import Data.Either (Either(..))
 import Data.Generic.Rep as Generic
 import Data.Generic.Rep.Show as Generic.Show
 import Data.Int (toNumber)
-import Data.List.NonEmpty (NonEmptyList, fromFoldable, singleton)
+import Data.List.NonEmpty (NonEmptyList, singleton)
 import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Number (fromString)
