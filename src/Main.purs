@@ -9,7 +9,7 @@ import Data.Generic.Rep as Generic
 import Data.Generic.Rep.Show as Generic.Show
 import Data.Int (toNumber)
 import Data.List.NonEmpty (NonEmptyList, singleton)
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (class Newtype, unwrap)
 import Data.Number (fromString)
 import Data.String (length, null, toLower, toUpper)
@@ -17,7 +17,6 @@ import Data.Validation.Semigroup (V, invalid, unV)
 import Effect (Effect)
 import Effect.Console (log, logShow)
 import Global.Unsafe (unsafeStringify)
-import Text.Email.Validate (toString)
 import Text.Email.Validate as Email
 
 type UnvalidatedForm =
@@ -145,10 +144,9 @@ validateEmail
   :: String
   -> V (NonEmptyList InvalidPrimitive) String
 validateEmail input =
-  maybe 
-    (invalid (singleton (InvalidEmail input)))
-    (pure <<< toString)
-    (Email.emailAddress input)
+  case Email.emailAddress input of
+    Nothing -> invalid (singleton (InvalidEmail input))
+    Just _  -> pure input
 
 -- | Validate that an input string is at least as long as some given `Int`
 validateMinimumLength
