@@ -20,14 +20,14 @@ import Text.Email.Validate as Email
 
 type UnvalidatedForm =
   { emailAddress :: String
-  , password    :: String
-  , azimuth     :: String
+  , password     :: String
+  , azimuth      :: String
   }
 
 type ValidatedForm =
   { emailAddress :: EmailAddress
-  , password    :: Password
-  , azimuth     :: Azimuth
+  , password     :: Password
+  , azimuth      :: Azimuth
   }
 
 validateForm
@@ -76,7 +76,7 @@ validateEmailAddress input =
       let result = 
                validateNonEmpty input
             *> validateEmail input
-  	  in bimap (singleton <<< InvalidEmailAddress) EmailAddress result
+      in bimap (singleton <<< InvalidEmailAddress) EmailAddress result
 
 validatePassword
   :: String
@@ -119,7 +119,8 @@ data InvalidPrimitive
   | NoLowercase String
   | NoUppercase String
   | NotANumber String
-  | NotInRange Int Int Number
+  | TooLow Int Number
+  | TooHigh Int Number
 
 -- | Validate that an input string can be parsed as number
 validateIsNumber :: String -> Either (NonEmptyList InvalidPrimitive) Number
@@ -134,10 +135,10 @@ validateInRange
   -> Int 
   -> Int 
   -> Either (NonEmptyList InvalidPrimitive) Number
-validateInRange input minValue maxValue =
-  case (input >= toNumber minValue && input <= toNumber maxValue) of
-    false -> Left (singleton (NotInRange minValue maxValue input))
-    _     -> pure input
+validateInRange input minValue maxValue
+  | input < toNumber minValue = Left (singleton (TooLow minValue input))
+  | input > toNumber maxValue = Left (singleton (TooHigh maxValue input))
+  | otherwise = pure input
 
 -- | Validate that an input string is not empty
 validateNonEmpty :: String -> V (NonEmptyList InvalidPrimitive) String
