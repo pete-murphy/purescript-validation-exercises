@@ -66,8 +66,8 @@ newtype Azimuth = Azimuth Number
 -- | Type of validation errors encountered when validating form fields
 data InvalidField
   = InvalidEmailAddress (NonEmptyList InvalidPrimitive)
- 	| InvalidPassword     (NonEmptyList InvalidPrimitive)
- 	| InvalidAzimuth      (NonEmptyList InvalidPrimitive)
+  | InvalidPassword     (NonEmptyList InvalidPrimitive)
+  | InvalidAzimuth      (NonEmptyList InvalidPrimitive)
 
 validateEmailAddress 
   :: String 
@@ -101,7 +101,7 @@ validateAzimuth input =
 
 fromEither
   :: forall result err
-  . Semigroup err
+  .  Semigroup err
   => Either err result 
   -> V err result
 fromEither (Left x)  = invalid x
