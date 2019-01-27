@@ -4,7 +4,7 @@ import Prelude
 
 import Data.Array (fromFoldable)
 import Data.Bifunctor (bimap)
-import Data.Either (Either(..))
+import Data.Either (Either(..), either)
 import Data.Generic.Rep as Generic
 import Data.Generic.Rep.Show as Generic.Show
 import Data.Int (toNumber)
@@ -98,15 +98,7 @@ validateAzimuth input =
     let result = do
           input' <- validateIsNumber input
           validateInRange input' 0 360
-    in bimap (singleton <<< InvalidAzimuth) Azimuth (fromEither result)
-
-fromEither
-  :: forall result err
-  .  Semigroup err
-  => Either err result 
-  -> V err result
-fromEither (Left x)  = invalid x
-fromEither (Right x) = pure x
+    in bimap (singleton <<< InvalidAzimuth) Azimuth (either invalid pure $ result)
 
 --------------------------------------------------------------------------------
 -- TYPES AND FUNCTIONS FOR PRIMITIVE VALIDATIONS

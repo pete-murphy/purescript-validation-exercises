@@ -10,7 +10,7 @@ Working through Joe Kachmar's `purescript-validation` exercises from LambdaConf.
 
 * [ ] Incorporate whatever I can from [this article](https://qiita.com/kimagure/items/f75befebdd37f6e8879f) and/or from [`home-run-ball`](https://github.com/justinwoo/purescript-home-run-ball).
 
-* [ ] Try to decipher how Arthur Xavier makes [this wizard example](https://medium.com/fuzzy-sharp/purescript-and-haskell-at-lumi-7e8e2b16fb13).
+* [ ] Try to decipher how Arthur Xavier makes [this wizard](https://medium.com/fuzzy-sharp/building-a-type-safe-embedded-dsl-for-form-components-with-validation-e7ffaaf537e4).
 
 * [ ] See if [this](https://asciinema.org/a/214727) is relevant.
 
